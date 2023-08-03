@@ -31,11 +31,13 @@ function useStoredState<T>(key: string) {
     return initialData
   });
 
-  const setValue = (value: SetStateAction<Todo []>) => {
-    const valueToStore = value instanceof Function ? value(state) : value;
-    localStorage.setItem(key, JSON.stringify(valueToStore));
-    setState(valueToStore);
-  };
+  const setValue = (value: SetStateAction<Todo[]>) => {
+    setState((prevState) => {
+      const valueToStore = value instanceof Function ? value(prevState) : value;
+      localStorage.setItem(key, JSON.stringify(valueToStore));
+      return valueToStore;
+    });
+  };  
   return [state, setValue] as const;
 }
 
