@@ -66,7 +66,7 @@ export const TodoItem: FC<TodoItemProps> = ({
         className="delete-button" 
         style={{display: display}}
         id={id}
-        onClick={(e) => deleteTodo(e.target.id)}
+        onClick={(e) => deleteTodo((e.target as HTMLElement).id)}
       >X</button>
     </Wrapper>
   );
