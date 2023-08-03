@@ -57,7 +57,7 @@ function App() {
       <AddInput onAdd={addTodo} />
       <TodoList>
         {todos.map((todo) => (
-          <TodoItem {...todo} onChange={handleChange} deleteTodo={deleteTodo} />
+        <TodoItem key={todo.id} {...todo} onChange={handleChange} deleteTodo={deleteTodo} />
         ))}
       </TodoList>
     </Wrapper>
