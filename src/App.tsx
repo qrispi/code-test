@@ -45,10 +45,7 @@ function App() {
   }, []);
 
   const deleteTodo = useCallback((id: string) => {
-    const current = todos.filter(todo => todo.id !== id)
-    setTodos([
-      ...current,
-    ]);
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }, []);
 
   return (
