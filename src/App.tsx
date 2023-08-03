@@ -18,16 +18,19 @@ function App() {
   const [todos, setTodos] = useStoredState<Todo[]>('todos')
 
   const addTodo = useCallback((label: string) => {
-    const items = [...todos, {
+    setTodos((prevTodos) => {
+      const newTodo = {
       id: uuid(),
       label,
       checked: false,
       created_at: Date.now(),
-    }]
-    const sorted = items.sort((a, b) => a.created_at - b.created_at)
-    const done = sorted.filter(todo => todo.checked)
-    const pending = sorted.filter(todo => !todo.checked)
-    setTodos([...pending, ...done]);
+      };
+      const items = [...prevTodos, newTodo];
+      const sorted = items.sort((a, b) => a.created_at - b.created_at);
+      const done = sorted.filter((todo) => todo.checked);
+      const pending = sorted.filter((todo) => !todo.checked);
+      return [...pending, ...done];
+    });
   }, []);
 
   const handleChange = useCallback((checked: boolean, id: string) => {
